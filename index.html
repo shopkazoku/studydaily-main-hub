@@ -1,326 +1,300 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyDaily - Trí Tuệ Nhân Tạo Dẫn Lối Tri Thức</title>
+    <meta name="description" content="Nền tảng tự học thông minh với Giáo viên AI. Cung cấp lộ trình cá nhân hóa Tiếng Anh, Toán, Lý, Hóa, Văn lớp 3-12.">
     
-    <!-- ========================================== -->
-    <!-- BỘ TỐI ƯU HÓA TÌM KIẾM (SEO MACHINE) -->
-    <!-- ========================================== -->
-    <title>StudyDaily - Hệ Sinh Thái Học Tập Thông Minh Lớp 3-12</title>
-    <meta name="description" content="Nền tảng tự học thông minh với Giáo viên AI. Cung cấp lộ trình cá nhân hóa các môn Tiếng Anh, Toán, Lý, Hóa, Văn từ lớp 3 đến lớp 12. Học giỏi hơn mỗi ngày cùng StudyDaily.">
-    <meta name="keywords" content="tự học, giáo viên AI, tiếng anh trực tuyến, học toán online, học lý, hóa, văn, lộ trình học tập, edtech">
-    <meta name="author" content="Son Nguyen">
-    
-    <!-- Open Graph (Tối ưu khi chia sẻ link lên Facebook, Zalo) -->
-    <meta property="og:title" content="StudyDaily - Học Giỏi Hơn Mỗi Ngày">
-    <meta property="og:description" content="Trải nghiệm phương pháp học tập Mindmap và Giáo viên AI tương tác 24/7.">
-    <meta property="og:type" content="website">
-    
-    <!-- ========================================== -->
     <!-- TÀI NGUYÊN GIAO DIỆN (UI ASSETS) -->
-    <!-- ========================================== -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Đổi sang font chữ Plus Jakarta Sans mang hơi hướng công nghệ hiện đại -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        pastel: {
-                            blue: '#e0f2fe',   // sky-100
-                            darkblue: '#0284c7',// sky-600
-                            yellow: '#fef3c7', // amber-100
-                            green: '#d1fae5',  // emerald-100
-                            purple: '#ede9fe', // violet-100
-                            pink: '#fce7f3'    // pink-100
-                        }
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    animation: { 
+                        'blob': 'blob 7s infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate' 
                     },
-                    fontFamily: { sans: ['Nunito', 'sans-serif'] },
-                    animation: { 'bounce-slow': 'bounce 3s infinite' }
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' }
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 10px #4f46e5, 0 0 20px #4f46e5' },
+                            '100%': { boxShadow: '0 0 20px #06b6d4, 0 0 40px #06b6d4' }
+                        }
+                    }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #f8fafc; overflow-x: hidden; scroll-behavior: smooth; }
-        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.5); }
+        body { background-color: #020617; color: #f8fafc; overflow-x: hidden; }
         
-        /* Hiệu ứng Sơ đồ tư duy mở rộng */
-        .mindmap-node { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0; transform: translateY(20px); }
-        .mindmap-node.active { opacity: 1; transform: translateY(0); }
+        /* Hiệu ứng Kính mờ (Glassmorphism) chuẩn SceneAI */
+        .glass-panel { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.05); }
+        .glass-card { background: linear-gradient(145deg, rgba(30,41,59,0.7) 0%, rgba(15,23,42,0.9) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
+        .glass-card:hover { border-color: rgba(99,102,241,0.5); transform: translateY(-5px); box-shadow: 0 10px 30px -10px rgba(99,102,241,0.3); }
+
+        /* Lưới nền (Cyber Grid) */
+        .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px); }
+
+        /* Hiệu ứng Node của Mindmap */
+        .mindmap-node { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: scale(0.9) translateY(20px); filter: blur(4px); }
+        .mindmap-node.active { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
         
-        /* Đường line kết nối */
-        .connector { position: absolute; background: #cbd5e1; z-index: -1; transition: all 0.4s; }
+        .gradient-text { background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
-<body class="bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]">
+<body class="bg-grid relative">
+
+    <!-- HIỆU ỨNG ÁNH SÁNG NỀN MỜ (BLOB GLOW) -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-indigo-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob z-[-1]"></div>
+    <div class="fixed top-20 right-1/4 w-96 h-96 bg-cyan-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000 z-[-1]"></div>
+    <div class="fixed -bottom-32 left-1/2 w-96 h-96 bg-purple-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-4000 z-[-1]"></div>
 
     <!-- ========================================== -->
-    <!-- 1. THANH ĐIỀU HƯỚNG (HEADER) -->
+    <!-- 1. HEADER KÍNH MỜ -->
     <!-- ========================================== -->
-    <header class="fixed w-full top-0 z-50 glass-card shadow-sm transition-all duration-300" id="navbar">
+    <header class="fixed w-full top-0 z-50 glass-panel border-b border-white/5 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-2 cursor-pointer">
-                <div class="bg-pastel-darkblue text-white w-10 h-10 rounded-xl flex items-center justify-center text-2xl font-black shadow-lg">
-                    <i class="fa-solid fa-graduation-cap"></i>
+            <div class="flex items-center gap-3 cursor-pointer group">
+                <div class="bg-gradient-to-tr from-indigo-500 to-cyan-400 w-10 h-10 rounded-lg flex items-center justify-center text-xl shadow-[0_0_15px_rgba(99,102,241,0.5)] group-hover:shadow-[0_0_25px_rgba(6,182,212,0.8)] transition-all">
+                    <i class="fa-solid fa-brain text-white"></i>
                 </div>
-                <span class="text-2xl font-black text-slate-800 tracking-tight">Study<span class="text-pastel-darkblue">Daily</span></span>
+                <span class="text-2xl font-extrabold tracking-tighter text-white">Study<span class="gradient-text">Daily</span></span>
             </div>
             
             <nav class="hidden md:flex gap-8">
-                <a href="#subjects" class="font-bold text-slate-600 hover:text-pastel-darkblue transition">Môn Học</a>
-                <a href="#roadmap" class="font-bold text-slate-600 hover:text-pastel-darkblue transition">Lộ Trình</a>
-                <a href="#ai-tutor" class="font-bold text-slate-600 hover:text-pastel-darkblue transition">AI Trợ Giảng</a>
+                <a href="#subjects" class="font-semibold text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition">Khám Phá</a>
+                <a href="#roadmap" class="font-semibold text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition">Lộ Trình</a>
+                <a href="#ai-tutor" class="font-semibold text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition">AI Agent</a>
             </nav>
 
-            <button class="bg-amber-400 hover:bg-amber-300 text-amber-900 font-black px-6 py-2.5 rounded-xl shadow-[0_4px_0_#b45309] active:translate-y-[4px] active:shadow-[0_0px_0_#b45309] transition-all">
-                Đăng Nhập
+            <button class="relative inline-flex h-10 overflow-hidden rounded-lg p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:scale-105 transition-transform">
+                <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]"></span>
+                <span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-6 py-1 text-sm font-bold text-white backdrop-blur-3xl">
+                    Đăng Nhập
+                </span>
             </button>
         </div>
     </header>
 
     <!-- ========================================== -->
-    <!-- 2. KHU VỰC CHÀO MỪNG (HERO SECTION) -->
+    <!-- 2. HERO SECTION CỰC NGHỆ THUẬT -->
     <!-- ========================================== -->
-    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-pastel-blue to-transparent z-[-1]"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <span class="inline-block bg-white text-pastel-darkblue font-black px-4 py-1.5 rounded-full shadow-sm mb-6 border border-sky-100 uppercase tracking-widest text-sm">
-                <i class="fa-solid fa-rocket mr-1"></i> Tự học chuẩn 4.0
-            </span>
-            <h1 class="text-4xl md:text-6xl font-black text-slate-800 leading-tight mb-6">
-                Hệ Sinh Thái Học Tập <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-500">Đa Trí Tuệ Lớp 3 - 12</span>
+    <section class="relative pt-40 pb-24 lg:pt-48 lg:pb-32 overflow-hidden flex flex-col items-center text-center">
+        <div class="max-w-5xl mx-auto px-4 relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-indigo-500/30 text-indigo-300 text-xs font-bold uppercase tracking-widest mb-8 hover:bg-indigo-500/10 transition-colors">
+                <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span></span>
+                Hệ Sinh Thái EdTech Thế Hệ Mới
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-[1.1] mb-6 tracking-tight">
+                Khai Phóng Trí Tuệ Bằng <br>
+                <span class="gradient-text drop-shadow-[0_0_30px_rgba(139,92,246,0.3)]">Giáo Viên AI Độc Bản</span>
             </h1>
-            <p class="text-lg md:text-xl text-slate-600 font-bold max-w-2xl mx-auto mb-10 leading-relaxed">
-                Khám phá lộ trình cá nhân hóa qua Sơ đồ tư duy sinh động. Giáo viên AI đồng hành 24/7 giúp bạn làm chủ Tiếng Anh, Toán, Lý, Hóa, Văn dễ dàng hơn bao giờ hết.
+            
+            <p class="text-lg md:text-xl text-slate-400 font-medium max-w-3xl mx-auto mb-12 leading-relaxed">
+                Trải nghiệm học tập tương lai qua Mạng lưới tư duy (Neural Mindmap). Không còn giao diện nhàm chán, mọi thao tác của bạn đều tương tác trực tiếp với lõi AI siêu việt lớp 3 đến 12.
             </p>
             
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#subjects" class="bg-pastel-darkblue hover:bg-sky-500 text-white font-black text-lg px-8 py-4 rounded-2xl shadow-[0_6px_0_#0369a1] active:translate-y-[6px] active:shadow-[0_0px_0_#0369a1] transition-all flex items-center justify-center">
-                    <i class="fa-solid fa-map-location-dot mr-2"></i> Khám Phá Lộ Trình
+                <a href="#subjects" class="bg-white text-slate-900 hover:bg-slate-200 font-bold text-lg px-8 py-4 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all flex items-center justify-center">
+                    Kích Hoạt Mindmap <i class="fa-solid fa-arrow-down ml-2"></i>
                 </a>
-                <button class="bg-white hover:bg-slate-50 text-slate-700 font-black text-lg px-8 py-4 rounded-2xl shadow-[0_6px_0_#cbd5e1] border-2 border-slate-200 active:translate-y-[6px] active:shadow-[0_0px_0_#cbd5e1] transition-all flex items-center justify-center">
-                    <i class="fa-solid fa-robot text-pastel-darkblue mr-2"></i> AI Tư Vấn Miễn Phí
+                <button class="glass-panel text-white hover:bg-white/10 font-bold text-lg px-8 py-4 rounded-xl border border-white/20 transition-all flex items-center justify-center">
+                    <i class="fa-solid fa-robot mr-2 text-cyan-400"></i> Trò Chuyện Cùng AI
                 </button>
             </div>
         </div>
     </section>
 
     <!-- ========================================== -->
-    <!-- 3. KHU VỰC MÔN HỌC (INTERACTIVE MINDMAP) -->
+    <!-- 3. NEURAL MINDMAP (GIAO DIỆN TƯƠNG TÁC) -->
     <!-- ========================================== -->
-    <section id="subjects" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-black text-slate-800 mb-4">Chạm Để Khám Phá Vũ Trụ Tri Thức</h2>
-                <p class="text-slate-500 font-bold">Lựa chọn môn học để xem sơ đồ tư duy phân nhánh chi tiết.</p>
-            </div>
-
-            <!-- Các nút bấm Môn học (Nodes gốc) -->
-            <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button onclick="activateMindmap('english')" id="btn-english" class="subject-btn group bg-pastel-purple hover:bg-violet-200 border-2 border-violet-300 text-violet-700 font-black px-6 py-4 rounded-2xl shadow-sm transition-all transform hover:-translate-y-1">
-                    <i class="fa-solid fa-language text-2xl mb-1 block group-hover:animate-bounce-slow"></i> Tiếng Anh
-                </button>
-                <button onclick="activateMindmap('math')" id="btn-math" class="subject-btn group bg-pastel-blue hover:bg-sky-200 border-2 border-sky-300 text-sky-700 font-black px-6 py-4 rounded-2xl shadow-sm transition-all transform hover:-translate-y-1">
-                    <i class="fa-solid fa-calculator text-2xl mb-1 block group-hover:animate-bounce-slow"></i> Toán Học
-                </button>
-                <button onclick="activateMindmap('physics')" id="btn-physics" class="subject-btn group bg-pastel-green hover:bg-emerald-200 border-2 border-emerald-300 text-emerald-700 font-black px-6 py-4 rounded-2xl shadow-sm transition-all transform hover:-translate-y-1">
-                    <i class="fa-solid fa-atom text-2xl mb-1 block group-hover:animate-bounce-slow"></i> Vật Lý
-                </button>
-                <button onclick="activateMindmap('chemistry')" id="btn-chemistry" class="subject-btn group bg-pastel-yellow hover:bg-amber-200 border-2 border-amber-300 text-amber-700 font-black px-6 py-4 rounded-2xl shadow-sm transition-all transform hover:-translate-y-1">
-                    <i class="fa-solid fa-flask text-2xl mb-1 block group-hover:animate-bounce-slow"></i> Hóa Học
-                </button>
-                <button onclick="activateMindmap('literature')" id="btn-literature" class="subject-btn group bg-pastel-pink hover:bg-pink-200 border-2 border-pink-300 text-pink-700 font-black px-6 py-4 rounded-2xl shadow-sm transition-all transform hover:-translate-y-1">
-                    <i class="fa-solid fa-book-journal-whills text-2xl mb-1 block group-hover:animate-bounce-slow"></i> Ngữ Văn
-                </button>
-            </div>
-
-            <!-- Bảng hiển thị Mindmap Động -->
-            <div class="relative bg-slate-50 border-4 border-slate-100 rounded-3xl p-8 min-h-[400px] flex flex-col items-center justify-center overflow-hidden">
-                <!-- Trạng thái mặc định -->
-                <div id="mindmap-default" class="text-center transition-opacity duration-300">
-                    <i class="fa-solid fa-hand-pointer text-4xl text-slate-300 mb-4 animate-pulse"></i>
-                    <p class="text-slate-400 font-bold text-lg">Hãy chạm vào một môn học ở trên!</p>
-                </div>
-
-                <!-- KHÔNG GIAN MINDMAP ĐƯỢC INJECT BẰNG JAVASCRIPT -->
-                <div id="mindmap-container" class="w-full max-w-4xl relative hidden flex-col items-center">
-                    <!-- Nội dung sẽ tự động render tại đây -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- 4. LỘ TRÌNH PHÁT TRIỂN (ROADMAP TIMELINE) -->
-    <!-- ========================================== -->
-    <section id="roadmap" class="py-20 bg-slate-800 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+    <section id="subjects" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-black text-white mb-4">Lộ Trình Xuyên Suốt Lớp 3 - 12</h2>
-                <p class="text-slate-400 font-bold">Một tài khoản duy nhất, đồng hành cùng bạn suốt 10 năm học tập.</p>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-4">Mạng Lưới <span class="text-indigo-400">Tri Thức</span></h2>
+                <p class="text-slate-400 font-medium">Lựa chọn tần số môn học để kích hoạt không gian phân tích của AI.</p>
             </div>
 
-            <div class="flex flex-col md:flex-row gap-6 justify-center items-stretch">
-                <!-- Khối Tiểu Học -->
-                <div class="flex-1 bg-slate-700/50 border border-slate-600 rounded-3xl p-6 text-center transform hover:-translate-y-2 transition-all">
-                    <div class="w-16 h-16 bg-sky-500 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4 shadow-lg shadow-sky-500/50">
-                        <i class="fa-solid fa-child"></i>
+            <!-- Các nút bấm Môn học phong cách Cyber -->
+            <div class="flex flex-wrap justify-center gap-4 mb-16">
+                <button onclick="activateMindmap('english')" id="btn-english" class="subject-btn glass-card text-white font-bold px-6 py-4 rounded-2xl flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-violet-500/20 flex items-center justify-center border border-violet-500/50 text-violet-400"><i class="fa-solid fa-language"></i></div>
+                    Tiếng Anh
+                </button>
+                <button onclick="activateMindmap('math')" id="btn-math" class="subject-btn glass-card text-white font-bold px-6 py-4 rounded-2xl flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-sky-500/20 flex items-center justify-center border border-sky-500/50 text-sky-400"><i class="fa-solid fa-calculator"></i></div>
+                    Toán Học
+                </button>
+                <button onclick="activateMindmap('physics')" id="btn-physics" class="subject-btn glass-card text-white font-bold px-6 py-4 rounded-2xl flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50 text-emerald-400"><i class="fa-solid fa-atom"></i></div>
+                    Vật Lý
+                </button>
+                <button onclick="activateMindmap('chemistry')" id="btn-chemistry" class="subject-btn glass-card text-white font-bold px-6 py-4 rounded-2xl flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center border border-amber-500/50 text-amber-400"><i class="fa-solid fa-flask"></i></div>
+                    Hóa Học
+                </button>
+            </div>
+
+            <!-- Màn hình hiển thị Mindmap Động (Hologram Screen) -->
+            <div class="relative glass-panel rounded-[2rem] p-8 md:p-12 min-h-[450px] flex flex-col items-center justify-center border border-indigo-500/20 shadow-[inset_0_0_50px_rgba(99,102,241,0.05)]">
+                <!-- Vòng tròn quét Hologram -->
+                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-transparent to-transparent z-0"></div>
+
+                <!-- Trạng thái mặc định -->
+                <div id="mindmap-default" class="text-center transition-opacity duration-300 relative z-10 flex flex-col items-center">
+                    <div class="w-24 h-24 rounded-full border border-slate-700 flex items-center justify-center mb-6 relative">
+                        <div class="absolute inset-0 rounded-full border-t-2 border-indigo-500 animate-spin"></div>
+                        <i class="fa-solid fa-fingerprint text-3xl text-slate-400"></i>
                     </div>
-                    <h3 class="text-xl font-black text-white mb-2">Tiểu Học (Lớp 3 - 5)</h3>
-                    <p class="text-sm font-bold text-slate-300">Gamification, vừa học vừa chơi. Khơi dậy niềm đam mê Khám phá kiến thức qua Mini-games.</p>
-                </div>
-                
-                <!-- Khối THCS -->
-                <div class="flex-1 bg-slate-700/50 border border-slate-600 rounded-3xl p-6 text-center transform hover:-translate-y-2 transition-all">
-                    <div class="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4 shadow-lg shadow-emerald-500/50">
-                        <i class="fa-solid fa-user-graduate"></i>
-                    </div>
-                    <h3 class="text-xl font-black text-white mb-2">THCS (Lớp 6 - 9)</h3>
-                    <p class="text-sm font-bold text-slate-300">Xây dựng gốc rễ, phương pháp học qua Mindmap. AI Tutor kèm cặp phát âm & chấm điểm trực tiếp.</p>
+                    <p class="text-slate-400 font-bold tracking-widest uppercase text-sm">Chờ Kích Hoạt Tín Hiệu</p>
                 </div>
 
-                <!-- Khối THPT -->
-                <div class="flex-1 bg-slate-700/50 border border-slate-600 rounded-3xl p-6 text-center transform hover:-translate-y-2 transition-all">
-                    <div class="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4 shadow-lg shadow-amber-500/50">
-                        <i class="fa-solid fa-medal"></i>
-                    </div>
-                    <h3 class="text-xl font-black text-white mb-2">THPT (Lớp 10 - 12)</h3>
-                    <p class="text-sm font-bold text-slate-300">Luyện đề chuyên sâu, phân tích lỗ hổng kiến thức. Sẵn sàng bứt phá cho kỳ thi Đại Học.</p>
+                <!-- KHÔNG GIAN MINDMAP AI -->
+                <div id="mindmap-container" class="w-full max-w-5xl relative hidden flex-col items-center z-10">
+                    <!-- Nội dung Render bằng JS -->
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ========================================== -->
-    <!-- 5. FOOTER & BẢN QUYỀN -->
-    <!-- ========================================== -->
-    <footer class="bg-white border-t-2 border-slate-100 py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex items-center justify-center gap-2 mb-4">
-                <i class="fa-solid fa-graduation-cap text-pastel-darkblue text-xl"></i>
-                <span class="text-xl font-black text-slate-800 tracking-tight">Study<span class="text-pastel-darkblue">Daily</span></span>
-            </div>
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">
-                &copy; 2026 Son Nguyen. All rights reserved.
-            </p>
-        </div>
-    </footer>
-
-    <!-- ========================================== -->
-    <!-- XỬ LÝ LOGIC (JAVASCRIPT) TỐI ƯU R&D -->
+    <!-- XỬ LÝ LOGIC (JAVASCRIPT) - HIỆU ỨNG AI NEURAL -->
     <!-- ========================================== -->
     <script>
-        // Data động cho Sơ đồ tư duy (Mô phỏng Database)
         const mindmapData = {
             english: {
-                title: "Tiếng Anh (Round-Up AI)",
-                color: "violet",
-                intro: "Nắm vững 4 kỹ năng qua công nghệ Smart Shadowing. AI tự động phát hiện lỗi phát âm và sửa lỗi ngay lập tức.",
-                nodes: ["Ngữ Pháp (Grammar)", "Từ Vựng (Vocab)", "Giao Tiếp (Speaking)", "Luyện Đề (Assessment)"],
-                link: "https://english.studydaily.net" // Trỏ về dự án đã hoàn thành
+                title: "HỆ SINH THÁI TIẾNG ANH (ROUND-UP AI)",
+                glowColor: "rgba(139, 92, 246, 0.5)", // Violet
+                borderClass: "border-violet-500/50",
+                textClass: "text-violet-400",
+                intro: "Thuật toán Smart Shadowing quét tần số giọng nói theo thời gian thực. Sửa lỗi phát âm tức thì, mở khóa lộ trình học thông qua AI.",
+                nodes: [
+                    { icon: "fa-spell-check", text: "Ngữ Pháp Thuật Toán" },
+                    { icon: "fa-microphone-lines", text: "Voice AI Luyện Đọc" },
+                    { icon: "fa-book-open", text: "Học Liệu Số Hóa" },
+                    { icon: "fa-swords", text: "Đấu Trường Game" }
+                ],
+                link: "https://english.studydaily.net" 
             },
             math: {
-                title: "Toán Học Thông Minh",
-                color: "sky",
-                intro: "Hệ thống hóa Công thức Đại số và Hình học bằng sơ đồ tư duy. Luyện tập với kho bài tập phân loại tự động.",
-                nodes: ["Đại Số", "Hình Học", "Tư Duy Logic", "Giải Đề Thi"],
+                title: "KHÔNG GIAN TOÁN HỌC LOGIC",
+                glowColor: "rgba(14, 165, 233, 0.5)", // Sky
+                borderClass: "border-sky-500/50",
+                textClass: "text-sky-400",
+                intro: "Trực quan hóa đồ thị hàm số và không gian 3D. Máy học tự động khoanh vùng điểm yếu Đại số & Hình học của học sinh.",
+                nodes: [
+                    { icon: "fa-square-root-variable", text: "Đại Số & Tích Phân" },
+                    { icon: "fa-cube", text: "Hình Học Không Gian" },
+                    { icon: "fa-chart-pie", text: "Thống Kê Dữ Liệu" },
+                    { icon: "fa-laptop-code", text: "Luyện Đề Auto" }
+                ],
                 link: "#"
             },
             physics: {
-                title: "Vật Lý Ứng Dụng",
-                color: "emerald",
-                intro: "Biến các định luật khô khan thành video mô phỏng trực quan. Hiểu sâu bản chất, giải nhanh trắc nghiệm.",
-                nodes: ["Cơ Học", "Điện Từ Học", "Quang Học", "Vật Lý Hiện Đại"],
+                title: "PHÒNG THÍ NGHIỆM VẬT LÝ ẢO",
+                glowColor: "rgba(16, 185, 129, 0.5)", // Emerald
+                borderClass: "border-emerald-500/50",
+                textClass: "text-emerald-400",
+                intro: "Mô phỏng động lực học và các hiện tượng vật lý bằng engine đồ họa. Tương tác trực tiếp với các định luật Newton, điện từ trường.",
+                nodes: [
+                    { icon: "fa-magnet", text: "Điện Từ Trường" },
+                    { icon: "fa-weight-hanging", text: "Cơ Học Lượng Tử" },
+                    { icon: "fa-eye", text: "Quang Học" },
+                    { icon: "fa-rocket", text: "Động Lực Học" }
+                ],
                 link: "#"
             },
             chemistry: {
-                title: "Hóa Học Trực Quan",
-                color: "amber",
-                intro: "Phòng thí nghiệm ảo giúp học sinh tự tay pha chế phản ứng. Học thuộc chuỗi phản ứng cực nhanh qua Mindmap.",
-                nodes: ["Hóa Vô Cơ", "Hóa Hữu Cơ", "Thí Nghiệm Ảo", "Chuỗi Phản Ứng"],
-                link: "#"
-            },
-            literature: {
-                title: "Ngữ Văn (AI Chấm Chữa)",
-                color: "pink",
-                intro: "Phân tích tác phẩm theo sơ đồ dạng cây. Tích hợp AI hỗ trợ chấm điểm hành văn và sửa lỗi chính tả.",
-                nodes: ["Đọc Hiểu", "Nghị Luận Xã Hội", "Phân Tích Tác Phẩm", "Kỹ Năng Viết"],
+                title: "MẠNG LƯỚI PHẢN ỨNG HÓA HỌC",
+                glowColor: "rgba(245, 158, 11, 0.5)", // Amber
+                borderClass: "border-amber-500/50",
+                textClass: "text-amber-400",
+                intro: "Chiết xuất dữ liệu chuỗi phản ứng thông minh. Thí nghiệm pha chế hóa chất an toàn tuyệt đối ngay trên giao diện Web.",
+                nodes: [
+                    { icon: "fa-vial", text: "Hóa Hữu Cơ" },
+                    { icon: "fa-vials", text: "Hóa Vô Cơ" },
+                    { icon: "fa-table-cells", text: "Bảng Tuần Hoàn 3D" },
+                    { icon: "fa-fire", text: "Thí Nghiệm Nhiệt" }
+                ],
                 link: "#"
             }
         };
 
-        // Hàm kích hoạt hiệu ứng Mindmap
         function activateMindmap(subjectKey) {
-            // 1. Đổi UI các nút bấm
+            // Reset Buttons
             document.querySelectorAll('.subject-btn').forEach(btn => {
-                btn.style.opacity = '0.5';
-                btn.style.transform = 'scale(0.95)';
+                btn.classList.remove('bg-white/10', 'border-white/40', 'shadow-[0_0_15px_rgba(255,255,255,0.2)]');
+                btn.classList.add('glass-card');
             });
             const activeBtn = document.getElementById(`btn-${subjectKey}`);
-            activeBtn.style.opacity = '1';
-            activeBtn.style.transform = 'scale(1.05)';
+            activeBtn.classList.remove('glass-card');
+            activeBtn.classList.add('bg-white/10', 'border-white/40', 'shadow-[0_0_15px_rgba(255,255,255,0.2)]');
 
-            // 2. Ẩn khối mặc định, Hiện vùng Mindmap
+            // Hiển thị khung
             document.getElementById('mindmap-default').classList.add('hidden');
             const container = document.getElementById('mindmap-container');
             container.classList.remove('hidden');
             container.classList.add('flex');
-            container.innerHTML = ''; // Clear cũ
+            container.innerHTML = ''; 
 
-            // 3. Lấy dữ liệu
             const data = mindmapData[subjectKey];
 
-            // 4. Render HTML Sơ đồ tư duy
-            // Khối Trung tâm
+            // RENDER GIAO DIỆN NODE TRUNG TÂM (CORE MODULE)
             let html = `
-                <div class="mindmap-node active z-10 bg-white border-4 border-${data.color}-300 p-6 rounded-3xl shadow-xl max-w-md text-center mb-8 relative">
-                    <h3 class="text-2xl font-black text-${data.color}-700 mb-2">${data.title}</h3>
-                    <p class="text-slate-600 font-bold text-sm mb-4">${data.intro}</p>
-                    <a href="${data.link}" class="inline-block bg-${data.color}-500 hover:bg-${data.color}-400 text-white font-black px-6 py-2 rounded-xl shadow-[0_4px_0_var(--tw-shadow-color)] shadow-${data.color}-700 active:translate-y-[4px] active:shadow-none transition-all">
-                        Vào Học Ngay <i class="fa-solid fa-arrow-right ml-1"></i>
+                <div class="mindmap-node active relative glass-card p-8 rounded-3xl max-w-xl text-center mb-12 border ${data.borderClass} z-20" style="box-shadow: 0 0 40px ${data.glowColor}">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-slate-900 border ${data.borderClass} rounded-full text-[10px] font-bold uppercase tracking-widest ${data.textClass}">
+                        <i class="fa-solid fa-satellite-dish mr-1 animate-pulse"></i> Module Đã Kích Hoạt
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-3 tracking-wide">${data.title}</h3>
+                    <p class="text-slate-400 font-medium text-sm mb-6 leading-relaxed">${data.intro}</p>
+                    <a href="${data.link}" class="inline-block bg-white text-slate-900 hover:bg-slate-200 font-bold px-6 py-2 rounded-lg transition-all">
+                        Khởi Chạy Hệ Thống <i class="fa-solid fa-power-off ml-1"></i>
                     </a>
                 </div>
                 
-                <div class="flex flex-wrap justify-center gap-4 w-full relative z-10">
+                <div class="flex flex-wrap justify-center gap-6 w-full relative z-20">
             `;
             
-            // Các nhánh con
+            // RENDER CÁC NHÁNH VỆ TINH (SATELLITE NODES)
             data.nodes.forEach((node, index) => {
                 html += `
-                    <div class="mindmap-node bg-${data.color}-50 border-2 border-${data.color}-200 px-4 py-3 rounded-xl font-bold text-${data.color}-800 shadow-sm" style="transition-delay: ${index * 100}ms">
-                        ${node}
+                    <div class="mindmap-node glass-panel border ${data.borderClass} px-5 py-4 rounded-2xl flex items-center gap-3 text-white shadow-lg" style="transition-delay: ${index * 150}ms">
+                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center ${data.textClass}">
+                            <i class="fa-solid ${node.icon}"></i>
+                        </div>
+                        <span class="font-bold text-sm tracking-wide">${node.text}</span>
                     </div>
                 `;
             });
             html += `</div>`;
             
+            // Vẽ các đường line mờ ảo kết nối (Tạo hiệu ứng Cyber)
+            html += `
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-[200px] border-b border-l border-r border-slate-700/50 rounded-b-[100px] z-10 hidden md:block opacity-50"></div>
+                <div class="absolute top-1/4 left-1/2 w-[1px] h-1/4 bg-gradient-to-b from-transparent to-slate-700/50 z-10 hidden md:block"></div>
+            `;
+
             container.innerHTML = html;
 
-            // 5. Kích hoạt Animation nhánh con sau một chút trễ
             setTimeout(() => {
                 const nodes = container.querySelectorAll('.mindmap-node');
                 nodes.forEach(node => node.classList.add('active'));
             }, 50);
         }
-
-        // Hiệu ứng Header khi cuộn trang
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 20) {
-                nav.classList.add('bg-white/95', 'shadow-md');
-                nav.classList.remove('glass-card');
-            } else {
-                nav.classList.add('glass-card');
-                nav.classList.remove('bg-white/95', 'shadow-md');
-            }
-        });
     </script>
 </body>
 </html>
