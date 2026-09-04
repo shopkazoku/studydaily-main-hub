@@ -23,36 +23,40 @@
         .glass-card { background: white; border-radius: 1.5rem; box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid rgba(226, 232, 240, 0.8); }
         .glass-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -10px rgba(29, 78, 216, 0.15); }
         .bg-pattern { background-image: radial-gradient(#CBD5E1 1px, transparent 1px); background-size: 30px 30px; }
-        .clip-blob { clip-path: inset(0 0 0 0 round 30px); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
     </style>
 </head>
 <body class="bg-pattern relative">
 
-    <!-- 1. HEADER -->
-    <header class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 transition-all h-20">
+    <!-- 1. HEADER (Đã tích hợp Logo & Hotline) -->
+    <header class="fixed w-full top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 transition-all h-20 shadow-sm">
         <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-            <!-- Logo -->
-            <div class="flex items-center gap-2 cursor-pointer">
-                <i class="fa-solid fa-book-open-reader text-3xl text-blue-600"></i>
+            <!-- Logo Mới -->
+            <div class="flex items-center gap-3 cursor-pointer">
+                <img src="./logostudy.png" alt="StudyDaily Logo" class="w-12 h-12 object-contain">
                 <span class="text-2xl font-extrabold tracking-tight text-slate-800">Study<span class="text-blue-600">Daily</span></span>
             </div>
             <!-- Menu -->
-            <nav class="hidden lg:flex gap-8 text-slate-600 font-medium">
-                <a href="#hero" class="hover:text-blue-600 transition-colors">Về chúng tôi</a>
+            <nav class="hidden lg:flex gap-8 text-slate-600 font-bold">
+                <a href="#about" class="hover:text-blue-600 transition-colors">Về chúng tôi</a>
                 <a href="#core" class="hover:text-blue-600 transition-colors">Tính năng</a>
                 <a href="#subjects" class="hover:text-blue-600 transition-colors">Môn học</a>
                 <a href="#core" class="hover:text-blue-600 transition-colors">Ngân hàng đề thi</a>
             </nav>
-            <!-- Nút Action -->
+            <!-- Nút Hotline Hành Động -->
             <div class="flex gap-4">
-                <a href="#subjects" class="hidden md:flex px-5 py-2 rounded-xl text-blue-600 font-bold hover:bg-blue-50 transition-colors border border-transparent">Đăng nhập</a>
-                <a href="#subjects" class="px-5 py-2 rounded-xl bg-blue-600 text-white font-bold shadow-lg shadow-blue-600/30 hover:bg-blue-700 hover:shadow-blue-600/50 transition-all hover:-translate-y-0.5">Vào Học Ngay</a>
+                <a href="tel:0967988155" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black shadow-[0_0_15px_rgba(249,115,22,0.4)] hover:scale-105 transition-transform flex items-center gap-2">
+                    <i class="fa-solid fa-phone-volume animate-pulse"></i> 0967.988.155
+                </a>
             </div>
         </div>
     </header>
 
-    <!-- 2. HERO SECTION -->
-    <section id="hero" class="pt-32 pb-20 overflow-hidden relative">
+    <!-- 2. HERO SECTION (Đã fix ảnh 3D thật của Boss) -->
+    <section id="hero" class="pt-36 pb-20 overflow-hidden relative">
         <div class="absolute top-20 left-0 w-full h-full overflow-hidden z-[-1]">
             <div class="absolute w-96 h-96 bg-blue-400/20 rounded-full blur-3xl -top-10 -left-10"></div>
             <div class="absolute w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl top-40 -right-10"></div>
@@ -69,9 +73,9 @@
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-4">
                     <a href="#subjects" class="px-8 py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl shadow-blue-600/30 hover:bg-blue-700 transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
-                        Học thử miễn phí <i class="fa-solid fa-arrow-right"></i>
+                        Vào Học Ngay <i class="fa-solid fa-arrow-right"></i>
                     </a>
-                    <a href="#core" class="px-8 py-4 bg-white text-slate-700 rounded-2xl font-bold shadow-md hover:shadow-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2 border border-slate-200">
+                    <a href="#about" class="px-8 py-4 bg-white text-slate-700 rounded-2xl font-bold shadow-md hover:shadow-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2 border border-slate-200">
                         Tìm hiểu thêm <i class="fa-regular fa-circle-play text-slate-400"></i>
                     </a>
                 </div>
@@ -79,15 +83,58 @@
             
             <!-- Hình ảnh 3D Hero -->
             <div class="lg:w-1/2 relative z-10 w-full max-w-lg mx-auto">
-                <!-- Boss có thể thay link ảnh thiết kế 3D thật vào thuộc tính src dưới đây -->
-                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/students-learning-online-5553535-4640188.png" alt="StudyDaily 3D Illustration" class="w-full h-auto drop-shadow-2xl animate-[float_6s_ease-in-out_infinite]">
+                <img src="./StudyDaily 3D Illustration.png" alt="StudyDaily Học Tập" class="w-full h-auto drop-shadow-2xl animate-[float_6s_ease-in-out_infinite]">
             </div>
         </div>
     </section>
 
-    <!-- 3. MÔN HỌC (SUB-DOMAINS) -->
-    <section id="subjects" class="py-16">
+    <!-- 3. KHÔNG GIAN: VỀ CHÚNG TÔI (MỚI) -->
+    <section id="about" class="py-20 relative bg-white border-y border-slate-200">
         <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <!-- Nội dung -->
+                <div class="lg:w-1/2 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-widest border border-blue-200">
+                        <i class="fa-solid fa-star"></i> Về StudyDaily
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 leading-tight">
+                        Kiến tạo tương lai qua <br><span class="text-blue-600">Giáo dục số hóa hóa</span>
+                    </h2>
+                    <p class="text-slate-600 text-lg leading-relaxed">
+                        StudyDaily không chỉ là một nền tảng học tập, mà là một hệ sinh thái giáo dục toàn diện. Chúng tôi áp dụng công nghệ Trí tuệ nhân tạo (AI) và thiết kế giao diện thông minh để biến mỗi giờ học thành một hành trình khám phá đầy thú vị.
+                    </p>
+                    <ul class="space-y-4 mt-6">
+                        <li class="flex items-center gap-3 text-slate-700 font-medium">
+                            <div class="w-8 h-8 rounded-full bg-green-100 text-green-500 flex items-center justify-center"><i class="fa-solid fa-check"></i></div>
+                            Đội ngũ Giáo viên chuyên môn cao, tận tâm.
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700 font-medium">
+                            <div class="w-8 h-8 rounded-full bg-green-100 text-green-500 flex items-center justify-center"><i class="fa-solid fa-check"></i></div>
+                            Lộ trình học tập được cá nhân hóa 100%.
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700 font-medium">
+                            <div class="w-8 h-8 rounded-full bg-green-100 text-green-500 flex items-center justify-center"><i class="fa-solid fa-check"></i></div>
+                            Cam kết sự tiến bộ vượt bậc của học viên.
+                        </li>
+                    </ul>
+                </div>
+                <!-- Cụm hình ảnh -->
+                <div class="lg:w-1/2 relative w-full">
+                    <div class="absolute inset-0 bg-blue-600 transform rounded-3xl rotate-3 scale-105 opacity-10"></div>
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Đội ngũ StudyDaily" class="rounded-3xl shadow-2xl relative z-10 object-cover h-[400px] w-full border-4 border-white">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. MÔN HỌC (SUB-DOMAINS) -->
+    <section id="subjects" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 flex items-center justify-center gap-4">
+                <div class="h-[2px] w-12 bg-slate-300 rounded-full"></div>
+                <h2 class="text-3xl font-extrabold text-slate-800">Chọn Phân Khu <span class="text-blue-600">Môn Học</span></h2>
+                <div class="h-[2px] w-12 bg-slate-300 rounded-full"></div>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
                 <!-- Card Tiếng Anh -->
@@ -126,8 +173,8 @@
         </div>
     </section>
 
-    <!-- 4. CORE SYSTEM -->
-    <section id="core" class="py-20 relative">
+    <!-- 5. CORE SYSTEM (Đã thay Logo trung tâm) -->
+    <section id="core" class="py-20 relative bg-slate-50">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 flex items-center justify-center gap-4">
                 <div class="h-[2px] w-12 bg-blue-200 rounded-full"></div>
@@ -155,13 +202,13 @@
                     </div>
                 </div>
 
-                <!-- Cột Giữa (Trung tâm) -->
+                <!-- Cột Giữa (LOGO TRUNG TÂM MỚI) -->
                 <div class="hidden lg:flex justify-center relative">
-                    <div class="w-56 h-56 rounded-full bg-blue-50 border-8 border-white shadow-2xl flex items-center justify-center relative z-10">
-                        <i class="fa-solid fa-graduation-cap text-7xl text-blue-500 animate-bounce"></i>
+                    <div class="w-64 h-64 rounded-full bg-white border-8 border-blue-50 shadow-2xl flex items-center justify-center relative z-10 overflow-hidden p-6">
+                        <img src="./logostudy.png" alt="StudyDaily Core" class="w-full h-full object-contain animate-[float_4s_ease-in-out_infinite]">
                     </div>
                     <!-- Đường Line kết nối ảo -->
-                    <svg class="absolute inset-0 w-full h-full z-0 text-blue-200" style="transform: scale(1.5);">
+                    <svg class="absolute inset-0 w-full h-full z-0 text-slate-200" style="transform: scale(1.5);">
                         <line x1="0" y1="20%" x2="50%" y2="50%" stroke="currentColor" stroke-width="2" stroke-dasharray="5,5" />
                         <line x1="0" y1="80%" x2="50%" y2="50%" stroke="currentColor" stroke-width="2" stroke-dasharray="5,5" />
                         <line x1="100%" y1="20%" x2="50%" y2="50%" stroke="currentColor" stroke-width="2" stroke-dasharray="5,5" />
@@ -188,10 +235,10 @@
                     </div>
                 </div>
 
-                <!-- Card Dưới Cùng (Mobile / Desktop) -->
+                <!-- Card Dưới Cùng -->
                 <div class="lg:col-span-3 flex justify-center mt-0 lg:-mt-10 relative z-20">
-                    <div class="glass-card p-6 flex items-start gap-4 w-full max-w-md">
-                        <div class="w-16 h-16 rounded-2xl bg-blue-100 text-blue-500 flex items-center justify-center text-3xl shrink-0"><i class="fa-solid fa-folder-open"></i></div>
+                    <div class="glass-card p-6 flex items-start gap-4 w-full max-w-md bg-gradient-to-r from-blue-50 to-white">
+                        <div class="w-16 h-16 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-3xl shrink-0 shadow-lg"><i class="fa-solid fa-folder-open"></i></div>
                         <div>
                             <h4 class="text-lg font-bold text-blue-700 mb-1">Ngân Hàng Đề Thi</h4>
                             <p class="text-slate-500 text-sm">Hệ thống xóc bài ngẫu nhiên hỗ trợ luyện tập toàn diện.</p>
@@ -203,7 +250,7 @@
         </div>
     </section>
 
-    <!-- 5. THỐNG KÊ (STATS) -->
+    <!-- 6. THỐNG KÊ (STATS) -->
     <section class="py-12 border-t border-slate-200 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -232,25 +279,18 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- BỘ TỔNG ĐÀI ĐA KÊNH (GIỮ NGUYÊN BẢN CŨ CỦA R&D) -->
+    <!-- BỘ TỔNG ĐÀI ĐA KÊNH -->
     <!-- ========================================== -->
     <div class="fixed bottom-8 right-8 flex flex-col gap-4 z-[60]">
         <!-- Nút Messenger -->
-        <a href="https://m.me/studydaily.net" target="_blank" class="w-14 h-14 rounded-full overflow-hidden shadow-lg hover:scale-110 transition-transform group relative border-2 border-white bg-white">
+        <a href="https://m.me/studydaily.net" target="_blank" class="w-14 h-14 rounded-full overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.3)] hover:scale-110 transition-transform group relative border-2 border-white bg-white">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" alt="Messenger" class="w-full h-full object-cover">
         </a>
         <!-- Nút Zalo -->
-        <a href="https://zalo.me/0967988155" target="_blank" class="w-14 h-14 rounded-full overflow-hidden shadow-lg hover:scale-110 transition-transform group relative border-2 border-white bg-white">
+        <a href="https://zalo.me/0967988155" target="_blank" class="w-14 h-14 rounded-full overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.3)] hover:scale-110 transition-transform group relative border-2 border-white bg-white">
             <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-full h-full object-contain p-1">
         </a>
     </div>
 
-    <!-- Cấu hình Animation Float -->
-    <style>
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-    </style>
 </body>
 </html>
